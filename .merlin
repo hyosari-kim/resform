@@ -1,0 +1,16 @@
+####{BSB GENERATED: NO EDIT
+B lib/bs
+FLG -open Resform
+FLG -ppx /Users/hyoeun/code/ResForm/node_modules/lenses-ppx/ppx
+FLG -ppx '/Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsc.exe -as-ppx -bs-jsx 3'
+S /Users/hyoeun/code/ResForm/node_modules/rescript/lib/ocaml
+B /Users/hyoeun/code/ResForm/node_modules/rescript/lib/ocaml
+FLG -open Belt
+FLG -w +a-4-9-20-40-41-42-50-61-102-48-30-40-42-61
+S /Users/hyoeun/code/ResForm/node_modules/@rescript/react/lib/ocaml
+B /Users/hyoeun/code/ResForm/node_modules/@rescript/react/lib/ocaml
+S example
+B lib/bs/example
+S src
+B lib/bs/src
+####BSB GENERATED: NO EDIT}

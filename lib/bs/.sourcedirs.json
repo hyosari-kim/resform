@@ -1,0 +1,1 @@
+{ "dirs" : [ "example" , "src" ] , "pkgs" : [ [ "lenses-ppx" , "/Users/hyoeun/code/ResForm/node_modules/lenses-ppx" ] , [ "@rescript/react" , "/Users/hyoeun/code/ResForm/node_modules/@rescript/react" ] ] , "generated" : [] }

@@ -1,0 +1,25 @@
+{
+  "name": "resform",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "keywords": [
+    "ReScript"
+  ],
+  "scripts": {
+    "clean": "rescript clean",
+    "build": "rescript build",
+    "watch": "rescript build -w",
+    "example": "vite -c example/vite.config.js"
+  },
+  "devDependencies": {
+    "@jihchi/vite-plugin-rescript": "^4.0.1",
+    "@rescript/react": "^0.10.3",
+    "@vitejs/plugin-react-refresh": "^1.3.6",
+    "lenses-ppx": "^6.1.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rescript": "^9.1.4",
+    "vite": "^3.0.7"
+  }
+}

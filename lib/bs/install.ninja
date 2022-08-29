@@ -1,0 +1,21 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+o ResForm-Resform.cmi : cp ../bs/src/ResForm-Resform.cmi
+o ResForm-Resform.cmj : cp ../bs/src/ResForm-Resform.cmj
+o ResForm-Resform.cmt : cp ../bs/src/ResForm-Resform.cmt
+o ResForm.res : cp ../../src/ResForm.res
+o Validator-Resform.cmi : cp ../bs/src/Validator-Resform.cmi
+o Validator-Resform.cmj : cp ../bs/src/Validator-Resform.cmj
+o Validator-Resform.cmt : cp ../bs/src/Validator-Resform.cmt
+o Validator.res : cp ../../src/Validator.res
+o SpreadProps-Resform.cmi : cp ../bs/src/SpreadProps-Resform.cmi
+o SpreadProps-Resform.cmj : cp ../bs/src/SpreadProps-Resform.cmj
+o SpreadProps-Resform.cmt : cp ../bs/src/SpreadProps-Resform.cmt
+o SpreadProps.res : cp ../../src/SpreadProps.res
+o Resform.cmi : cp ../bs/Resform.cmi
+o Resform.cmj : cp ../bs/Resform.cmj
+o Resform.cmt : cp ../bs/Resform.cmt
+build install.stamp : touch ResForm-Resform.cmi ResForm-Resform.cmj Validator-Resform.cmi Validator-Resform.cmj SpreadProps-Resform.cmi SpreadProps-Resform.cmj Resform.cmi Resform.cmj

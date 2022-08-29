@@ -1,0 +1,32 @@
+{
+  "name": "resform",
+  "reason": {
+    "react-jsx": 3
+  },
+  "version": "0.0.1",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "example",
+      "subdirs": true,
+      "type": "dev"
+    }
+  ],
+  "package-specs": {
+    "module": "es6-global",
+    "in-source": true
+  },
+  "ppx-flags": ["lenses-ppx/ppx"],
+  "suffix": ".mjs",
+  "namespace": true,
+  "bs-dependencies": ["@rescript/react"],
+  "bs-dev-dependencies": [],
+  "bsc-flags": ["-open Belt"],
+  "warnings": {
+    "number": "-48-30",
+    "error": "+A+8+11+12+16+26+27+31+32+33+34+35+39+44+45+101+102+104+105"
+  }
+}

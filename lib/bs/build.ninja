@@ -1,0 +1,37 @@
+rescript = 1
+g_finger := /Users/hyoeun/code/ResForm/node_modules/@rescript/react/lib/ocaml/install.stamp
+rule astj
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsc.exe -w -48-30 -warn-error +A+8+11+12+16+26+27+31+32+33+34+35+39+44+45+101+102+104+105 -bs-v 9.1.4,1660487173.37 -ppx /Users/hyoeun/code/ResForm/node_modules/lenses-ppx/ppx -bs-jsx 3 -open Belt -absname -bs-ast -o $out $i
+o example/Header.ast : astj ../../example/Header.res
+rule deps_dev
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsb_helper.exe -g -hash 38ea33a51cebbcefaf4e0cde76d28a3c -bs-ns Resform $in
+  restat = 1
+o example/Header.d : deps_dev example/Header.ast
+rule mij_dev
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsc.exe -bs-ns Resform -I example -I . -I src -I /Users/hyoeun/code/ResForm/node_modules/@rescript/react/lib/ocaml  -open Belt -w -48-30 -warn-error +A+8+11+12+16+26+27+31+32+33+34+35+39+44+45+101+102+104+105 -bs-package-name resform -bs-package-output es6-global:$in_d:.mjs -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o example/Header-Resform.cmj example/Header-Resform.cmi ../../example/Header.mjs : mij_dev example/Header.ast
+o example/Example.ast : astj ../../example/Example.res
+o example/Example.d : deps_dev example/Example.ast
+o example/Example-Resform.cmj example/Example-Resform.cmi ../../example/Example.mjs : mij_dev example/Example.ast
+o src/ResForm.ast : astj ../../src/ResForm.res
+rule deps
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsb_helper.exe -hash 38ea33a51cebbcefaf4e0cde76d28a3c -bs-ns Resform $in
+  restat = 1
+o src/ResForm.d : deps src/ResForm.ast
+rule mij
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsc.exe -bs-ns Resform -I . -I src -I /Users/hyoeun/code/ResForm/node_modules/@rescript/react/lib/ocaml -open Belt -w -48-30 -warn-error +A+8+11+12+16+26+27+31+32+33+34+35+39+44+45+101+102+104+105 -bs-package-name resform -bs-package-output es6-global:$in_d:.mjs -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/ResForm-Resform.cmj src/ResForm-Resform.cmi ../../src/ResForm.mjs : mij src/ResForm.ast
+o src/Validator.ast : astj ../../src/Validator.res
+o src/Validator.d : deps src/Validator.ast
+o src/Validator-Resform.cmj src/Validator-Resform.cmi ../../src/Validator.mjs : mij src/Validator.ast
+o src/SpreadProps.ast : astj ../../src/SpreadProps.res
+o src/SpreadProps.d : deps src/SpreadProps.ast
+o src/SpreadProps-Resform.cmj src/SpreadProps-Resform.cmi ../../src/SpreadProps.mjs : mij src/SpreadProps.ast
+rule build_package
+  command = /Users/hyoeun/code/ResForm/node_modules/rescript/darwin/bsc.exe -w -49 -color always -no-alias-deps  $i
+  restat = 1
+o Resform.cmi : build_package Resform.mlmap
