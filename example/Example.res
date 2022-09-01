@@ -1,21 +1,26 @@
 module Example = {
-  module FieldState = %lenses(type state = {name: string, age: int})
+  module Fields = %lenses(type state = {name: string, age: int})
 
-  module Form = ResForm.Make(FieldState)
+  module Form = ResForm.Make(Fields)
 
-  let initialValue: FieldState.state = {
+  let initialValue: Fields.state = {
     name: "",
     age: 0,
   }
 
   @react.component
   let make = () => {
-    let {register} = Form.use(initialValue, ~validators=list{})
+    let {form, handleSubmit} = Form.use(initialValue, ~validators=list{})
 
-    <form>
+    let onClickSubmit = (_, _) => {
+      Js.log2("form", form)
+    }
+
+    <form onSubmit={handleSubmit(onClickSubmit)}>
       <h2 className="h2"> {"ResForm Demo"->React.string} </h2>
-      <SpreadProps props={register(FieldState.Name->Form.Field)}> <input /> </SpreadProps>
-      <SpreadProps props={register(FieldState.Age->Form.Field)}> <input /> </SpreadProps>
+      <SpreadProps props={form->Form.register(Fields.Name)}> <input /> </SpreadProps>
+      <SpreadProps props={form->Form.register(Fields.Age)}> <input /> </SpreadProps>
+      <button type_="submit"> {`제출`->React.string} </button>
     </form>
   }
 }

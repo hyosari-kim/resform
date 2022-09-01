@@ -30,7 +30,7 @@ function set(values, field, value) {
   }
 }
 
-var FieldState = {
+var Fields = {
   get: get,
   set: set
 };
@@ -47,16 +47,28 @@ var initialValue = {
 
 function Example$Example(Props) {
   var match = Curry._2(Form.use, initialValue, /* [] */0);
-  return React.createElement("form", undefined, React.createElement("h2", {
+  var form = match.form;
+  var onClickSubmit = function (param, param$1) {
+    console.log("form", form);
+    
+  };
+  return React.createElement("form", {
+              onSubmit: Curry._1(match.handleSubmit, onClickSubmit)
+            }, React.createElement("h2", {
                   className: "h2"
                 }, "ResForm Demo"), React.createElement(SpreadProps$Resform.make, {
                   children: React.createElement("input", undefined),
-                  props: Curry._1(match.register, /* Name */0)
-                }));
+                  props: Curry._2(Form.register, form, /* Name */0)
+                }), React.createElement(SpreadProps$Resform.make, {
+                  children: React.createElement("input", undefined),
+                  props: Curry._2(Form.register, form, /* Age */1)
+                }), React.createElement("button", {
+                  type: "submit"
+                }, "제출"));
 }
 
 var Example = {
-  FieldState: FieldState,
+  Fields: Fields,
   Form: Form,
   initialValue: initialValue,
   make: Example$Example

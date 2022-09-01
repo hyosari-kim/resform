@@ -18,43 +18,51 @@ function Make(Config) {
   var ErrorFieldCmp = Belt_Id.MakeComparable({
         cmp: cmp
       });
-  var getError = Belt_Map.get;
+  var getError = function (state, field) {
+    return Belt_Map.get(state.errors.contents, field);
+  };
   var eqErrors = function (cur, next) {
     return Belt_Map.eq(cur, next, (function (ce, ne) {
                   return ce.type_ === ne.type_;
                 }));
   };
-  var register = function (state, rawField) {
-    state.refs.contents = Belt_List.setAssoc(state.refs.contents, rawField, React.useRef(null), Caml_obj.caml_equal);
+  var register = function (state, field) {
+    state.refs.contents = Belt_List.setAssoc(state.refs.contents, field, React.useRef(null), Caml_obj.caml_equal);
     var onChange = function (e) {
-      var ref = Belt_List.getAssoc(state.refs.contents, rawField, Caml_obj.caml_equal);
+      Belt_List.getAssoc(state.refs.contents, field, Caml_obj.caml_equal);
       var target = e.target.value;
-      state.values.contents = Curry._3(Config.set, state.values.contents, rawField, target);
-      console.log("ref: ", ref, "values: ", state.values.contents);
+      state.values.contents = Curry._3(Config.set, state.values.contents, field, target);
       
     };
     return {
             onChange: onChange,
-            ref: Belt_List.getAssoc(state.refs.contents, rawField, Caml_obj.caml_equal)
+            ref: Belt_List.getAssoc(state.refs.contents, field, Caml_obj.caml_equal)
           };
   };
-  var use = function (inital, validators) {
+  var use = function (initial, validators) {
     var match = React.useState(function () {
           return {
                   values: {
-                    contents: inital
+                    contents: initial
                   },
                   refs: {
                     contents: /* [] */0
                   },
-                  errors: Belt_Map.make(ErrorFieldCmp)
+                  errors: {
+                    contents: Belt_Map.make(ErrorFieldCmp)
+                  },
+                  validators: validators
                 };
         });
     var state = match[0];
+    var handleSubmit = function (fn, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      return Curry._2(fn, state.values.contents, e);
+    };
     return {
-            register: (function (param) {
-                return register(state, param);
-              })
+            form: state,
+            handleSubmit: handleSubmit
           };
   };
   return {
